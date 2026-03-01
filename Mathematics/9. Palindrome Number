@@ -1,0 +1,27 @@
+// Problem: LeetCode 9 - Palindrome Number
+// Difficulty: Easy
+// Approach: Reverse the Number
+// Time Complexity: O(log n)
+// Space Complexity: O(1)
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+
+        // Negative numbers are not palindrome
+        if (x < 0) {
+            return false;
+        }
+
+        int original = x;
+        long long reversed = 0;
+
+        while (x > 0) {
+            int digit = x % 10;
+            reversed = reversed * 10 + digit;
+            x /= 10;
+        }
+
+        return original == reversed;
+    }
+};

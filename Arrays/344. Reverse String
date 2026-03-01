@@ -1,0 +1,24 @@
+// Problem: LeetCode 344 - Reverse String
+// Difficulty: Easy
+// Approach: Two Pointer
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    void reverseString(vector<char>& str) {
+
+        int first = 0;
+        int last = str.size() - 1;
+
+        // Swap characters from both ends
+        while (first < last) {
+            swap(str[first], str[last]);
+            first++;
+            last--;
+        }
+    }
+};

@@ -1,0 +1,35 @@
+// Problem: LeetCode 141 - Linked List Cycle
+// Difficulty: Easy
+// Approach: Floyd’s Cycle Detection Algorithm (Slow & Fast Pointer)
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ * };
+ */
+
+class Solution {
+public:
+    bool hasCycle(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        // Move slow by 1 step and fast by 2 steps
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            // If they meet, cycle exists
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;  // No cycle found
+    }
+};

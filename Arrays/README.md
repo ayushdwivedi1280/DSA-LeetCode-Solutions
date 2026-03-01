@@ -1,4 +1,4 @@
-# Chapter 01 – Arrays
+# Arrays
 
 This folder contains problems based on array concepts.
 

@@ -1,0 +1,21 @@
+// Problem: LeetCode 136 - Single Number
+// Difficulty: Easy
+// Approach: Bit Manipulation (XOR)
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int result = 0;
+
+        for (int num : nums) {
+            result ^= num;   // XOR operation
+        }
+
+        return result;
+    }
+};

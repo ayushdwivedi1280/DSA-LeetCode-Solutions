@@ -1,0 +1,44 @@
+// Problem: LeetCode 20 - Valid Parentheses
+// Difficulty: Easy
+// Approach: Stack (LIFO Principle)
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+#include <stack>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string str) {
+        stack<char> st;
+
+        for (char ch : str) {
+
+            // Push opening brackets
+            if (ch == '(' || ch == '{' || ch == '[') {
+                st.push(ch);
+            } 
+            else {
+                // If stack is empty, invalid
+                if (st.empty()) {
+                    return false;
+                }
+
+                // Check matching pair
+                if ((st.top() == '(' && ch == ')') ||
+                    (st.top() == '{' && ch == '}') ||
+                    (st.top() == '[' && ch == ']')) {
+                    
+                    st.pop();
+                } 
+                else {
+                    return false;
+                }
+            }
+        }
+
+        // If stack is empty, all brackets matched
+        return st.empty();
+    }
+};

@@ -1,0 +1,44 @@
+// Problem: 503. Next Greater Element II
+// Platform: LeetCode
+// Difficulty: Medium
+// Category: Stack / Monotonic Stack
+//
+// Approach:
+// This problem is similar to Next Greater Element, but the array is circular.
+// To simulate circular traversal, we iterate from (2*n - 1) to 0.
+// We use a monotonic decreasing stack that stores indices of elements.
+//
+// Steps:
+// 1. Traverse the array twice using i from 2*n-1 to 0.
+// 2. Use (i % n) to access the circular index.
+// 3. Pop elements from the stack while they are smaller or equal to the current element.
+// 4. If the stack becomes empty, the next greater element is -1.
+// 5. Otherwise, the top of the stack is the next greater element.
+// 6. Push the current index (i % n) into the stack.
+//
+// Time Complexity: O(n)
+// Each element is pushed and popped at most once.
+//
+// Space Complexity: O(n)
+// Stack and answer array both take O(n) space.
+
+
+
+
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+        stack<int> st;
+        vector<int> ans(n,0);
+
+        for(int i = 2*n-1;i>=0;i--){
+            while(!st.empty() && nums[st.top()]<= nums[i%n]){
+                st.pop();
+            }
+            ans[i%n] = st.empty() ? -1 : nums[st.top()]; 
+            st.push(i%n);
+        }
+        return ans;
+    }
+};

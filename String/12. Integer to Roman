@@ -1,0 +1,39 @@
+/*
+    Problem: Integer to Roman
+    Platform: LeetCode
+    Difficulty: Medium
+    Category: Greedy, String
+
+    Approach:
+    - Use a greedy strategy by always selecting the largest Roman value 
+      less than or equal to the current number.
+    - Maintain two arrays:
+        1. values  -> integer values
+        2. symbols -> corresponding Roman numerals
+    - Iterate through the values array and while the current number 
+      is greater than or equal to the value, append the symbol to 
+      the result and subtract the value from the number.
+
+    Time Complexity: O(1)
+    Space Complexity: O(1)
+
+    Author: Ayush Dwivedi
+*/
+
+
+class Solution {
+public:
+    string intToRoman(int num) {
+        vector<int> values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        vector<string> symbols = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        
+        string result = "";
+        for(int i=0;i<values.size();i++){
+        while(num>=values[i]){
+             result+=symbols[i];
+             num-=values[i];
+        }
+        }
+        return result;
+    }
+};

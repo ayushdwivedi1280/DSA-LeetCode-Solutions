@@ -1,0 +1,43 @@
+/*
+------------------------------------------------------------
+Problem: Roman to Integer (LeetCode 13)
+Difficulty: Easy
+
+Approach:
+We maintain two arrays:
+1. symbol → Roman symbols in descending order
+2. value  → Corresponding integer values
+
+Algorithm:
+1. Traverse each Roman symbol from largest to smallest.
+2. Check if the input string starts with that symbol.
+3. If it matches:
+      - Add its value to the result
+      - Remove that symbol from the beginning of the string
+4. Continue until the entire string is processed.
+
+
+
+Time Complexity:  O(n)
+Space Complexity: O(1)
+------------------------------------------------------------
+*/
+
+class Solution {
+public:
+    int romanToInt(string s) {
+        vector<string> symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        vector<int> value = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        
+        int num = 0;
+
+        for(int i = 0; i < symbol.size(); i++){
+            while(s.substr(0, symbol[i].size()) == symbol[i]){
+                num += value[i];
+                s = s.substr(symbol[i].size()); // remove matched prefix
+            }
+        }
+
+        return num;
+    }
+};

@@ -1,0 +1,54 @@
+/*
+-----------------------------------------------------------
+Problem: First Unique Character in a String
+Platform: LeetCode
+Approach: Hash Map + Queue
+
+Idea:
+- We traverse the string and count the frequency of each character
+  using an unordered_map.
+- If a character appears for the first time, we push its index
+  into the queue.
+- The queue always keeps track of characters that might be unique.
+
+Algorithm:
+1. Traverse the string.
+2. If the character is seen for the first time, push its index into the queue.
+3. Increase its frequency in the map.
+4. Remove indices from the front of the queue if their frequency becomes > 1.
+5. At the end:
+      - If the queue is empty → no unique character → return -1
+      - Otherwise return the front index (first unique character).
+
+Time Complexity:  O(n)
+Space Complexity: O(n)
+
+Example:
+Input:  "leetcode"
+Output: 0   (l is the first unique character)
+
+Input:  "loveleetcode"
+Output: 2   (v is the first unique character)
+-----------------------------------------------------------
+*/
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map <char,int> m;
+        queue<int> Q;
+
+        for(int i=0;i<s.size();i++){
+            if(m.find(s[i])==m.end()){
+                Q.push(i);
+            }
+            m[s[i]]++;
+
+            while(Q.size()>0 && m[s[Q.front()]]>1){
+                Q.pop();
+            }
+        }
+
+        return  Q.empty() ? -1 : Q.front();
+    }
+};

@@ -1,0 +1,61 @@
+/*
+    🔍 Problem: Search in Rotated Sorted Array
+
+    📌 Description:
+    Given a rotated sorted array (with no duplicates), find the index of a target element.
+    If the target is not present, return -1.
+
+    🧠 Approach:
+    - Use Binary Search (optimized O(log n))
+    - At every step, check which half is sorted:
+        1. If left half is sorted:
+            - Check if target lies in left half
+            - Else search in right half
+        2. If right half is sorted:
+            - Check if target lies in right half
+            - Else search in left half
+
+    ⚡ Key Insight:
+    - In rotated array, at least one half is always sorted
+    - Use this property to eliminate half of the search space
+
+    ⏱ Time Complexity: O(log n)
+    💾 Space Complexity: O(1)
+
+    🧪 Example:
+    Input: nums = [4,5,6,7,0,1,2], target = 0
+    Output: 4
+*/
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int start = 0, end = nums.size() - 1;
+       
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+
+            if(nums[mid] == target) return mid;
+
+            // Left half is sorted
+            if(nums[mid] >= nums[start]){
+                if(target >= nums[start] && target <= nums[mid]){
+                    end = mid - 1;
+                }
+                else{
+                    start = mid + 1;
+                }
+            }
+            // Right half is sorted
+            else{
+                if(target >= nums[mid] && target <= nums[end]){
+                    start = mid + 1;
+                }
+                else{
+                    end = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+};

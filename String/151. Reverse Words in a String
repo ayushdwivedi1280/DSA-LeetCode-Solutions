@@ -1,0 +1,52 @@
+/*
+    Problem: Reverse Words in a String
+    
+    Approach:
+    1. Reverse the entire string.
+    2. Traverse the string and extract each word.
+    3. Reverse each individual word to restore correct order.
+    4. Add words to the answer string with proper spacing.
+    
+    Key Points:
+    - Extra spaces are ignored.
+    - Words are added with a single space.
+    - Leading space is removed using substr(1).
+    
+    Time Complexity: O(n)
+    - Each character is visited a constant number of times.
+    
+    Space Complexity: O(n)
+    - Extra space is used for storing the result string.
+*/
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        int n = s.length();
+        string ans = "";
+
+        // Step 1: Reverse entire string
+        reverse(s.begin(), s.end());
+
+        for(int i = 0; i < n; i++){
+            string word = "";
+
+            // Step 2: Extract word
+            while(i < n && s[i] != ' '){
+                word += s[i];
+                i++;
+            }
+
+            // Step 3: Reverse individual word
+            reverse(word.begin(), word.end());
+
+            // Step 4: Add to result if not empty
+            if(word.length() > 0){
+                ans += " " + word;
+            }
+        }
+
+        // Remove leading space
+        return ans.substr(1);
+    }
+};

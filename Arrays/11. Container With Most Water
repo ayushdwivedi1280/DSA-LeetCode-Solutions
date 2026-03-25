@@ -1,0 +1,41 @@
+/*
+    Problem: Container With Most Water (LeetCode)
+
+    Approach: Two Pointer (Greedy)
+
+    Idea:
+    - Use two pointers (left and right) starting from both ends.
+    - Calculate area = width * min(height[left], height[right]).
+    - Move the pointer with smaller height inward to try for a better area.
+    - Keep track of maximum area.
+
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+
+    Author: Ayush Dwivedi
+*/
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int maxWater = 0;   // stores maximum water
+        int lp = 0, rp = height.size() - 1;  // two pointers
+
+        while (lp < rp) {
+            int w = rp - lp;  // width
+            int ht = min(height[lp], height[rp]);  // minimum height
+            int currWater = w * ht;  // current area
+
+            maxWater = max(maxWater, currWater);
+
+            // move pointer with smaller height
+            if (height[lp] < height[rp]) {
+                lp++;
+            } else {
+                rp--;
+            }
+        }
+
+        return maxWater;
+    }
+};

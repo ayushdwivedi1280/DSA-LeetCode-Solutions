@@ -1,0 +1,56 @@
+/*
+========================================================
+                GAS STATION PROBLEM
+========================================================
+
+Category  : Greedy Algorithm
+Approach  : Greedy + Single Pass
+Time      : O(n)
+Space     : O(1)
+
+Problem:
+Given two arrays gas and cost, return the starting index
+of the gas station from where we can complete the circuit.
+If not possible, return -1.
+
+Approach:
+1. Calculate total gas and total cost.
+   - If total gas < total cost → impossible → return -1
+
+2. Traverse the array:
+   - Maintain current gas (currgas)
+   - If currgas becomes negative:
+        → Reset start index to i + 1
+        → Reset currgas = 0
+
+3. Final start index is the answer.
+
+Key Insight:
+If we fail at index i, then any index between previous
+start and i cannot be a valid start.
+
+========================================================
+*/
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int totgas = 0; 
+        int totcost = 0;
+        int start = 0; 
+        int currgas = 0;
+
+        for(int i = 0; i < gas.size(); i++){
+            totgas += gas[i];
+            totcost += cost[i];
+            currgas += (gas[i] - cost[i]);
+           
+            if(currgas < 0){
+                start = i + 1;
+                currgas = 0;
+            }
+        }
+
+        return totcost > totgas ? -1 : start;
+    }
+};
